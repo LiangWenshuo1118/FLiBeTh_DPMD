@@ -1,0 +1,74 @@
+{
+  "api_version": "1.0",
+  "deepmd_version": "3.x",
+  "train": [
+    {
+      "command": "dp",
+      "machine": {
+        "batch_type": "slurm",
+        "context_type": "local",
+        "local_root": "./",
+        "remote_root": "../work_dir"
+        },
+      "resources": {
+        "number_node": 1,
+        "cpu_per_node": 32,
+        "gpu_per_node": 1,
+        "queue_name": "ka",
+        "group_size": 1,
+        "source_list":[""],
+        "_time_limit": "240:00:00"
+      }
+    }
+  ],
+  "model_devi": [
+    {
+      "command": "lmp",
+      "machine": {
+        "batch_type": "slurm",
+      	"context_type": "local",
+	    "local_root" : "./",
+	    "remote_root": "../work_dir"
+      },
+      "resources": {
+        "number_node": 1,
+        "cpu_per_node": 32,
+        "gpu_per_node": 1,
+        "queue_name": "ka",
+        "group_size": 1,
+        "source_list": ["conda activate ~/en"],
+        "_time_limit": "240:00:00"
+      }
+    }
+  ],
+  "fp": [
+    {
+      "command": "mpirun -np 128 vasp_std",
+      "machine": {
+        "batch_type": "slurm",
+        "context_type": "ssh",
+        "local_root" : "./",
+	"remote_root": "/",
+        "remote_profile":{
+          "hostname":"s",
+          "port":22,
+          "username":"",
+          "key_filename":"/",
+	  "tar_compress" : true
+        }
+      },
+      "resources": {
+        "number_node": 2,
+        "cpu_per_node":128,
+        "gpu_per_node": 0,
+        "queue_name": "amd_512",
+        "group_size":30,
+        "source_list": [
+          ""
+        ],
+        "_time_limit": "240:00:00"
+      }
+    }
+  ]
+}
+

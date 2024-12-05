@@ -1,0 +1,83 @@
+{
+    "type_map": ["F","Be","Li","Th"],
+    "mass_map": [19.00, 9.012, 6.941, 232.0],
+    "init_data_prefix": "../00.data",
+    "init_data_sys": [
+        "FLiBeTh0/training_data",
+        "FLiBeTh3/training_data",
+        "FLiBeTh5/training_data",
+        "FLiBeTh10/training_data"],
+    "sys_configs_prefix": "./input_files",
+    "sys_configs": [
+        ["POSCAR_Th0"],
+        ["POSCAR_Th3"],
+        ["POSCAR_Th5"],
+        ["POSCAR_Th10"]],
+    "_comment1": " that's all ",
+    "numb_models": 4,
+    "default_training_param": {
+        "model": {
+            "type_map": ["F","Be","Li","Th"],
+            "descriptor": {
+                "type": "se_a",
+                "sel": [120, 120,120,120],
+                "rcut_smth": 0.5,
+                "rcut": 7.0,
+                "neuron": [25, 50, 100],
+                "resnet_dt": true,
+                "axis_neuron": 12,
+                "seed": 1
+            },
+            "fitting_net": {
+                "neuron": [240, 240, 240],
+                "resnet_dt": false,
+                "seed": 1
+            }
+        },
+        "learning_rate": {
+            "type": "exp",
+            "start_lr": 0.001,
+            "decay_steps": 100
+        },
+        "loss": {
+            "start_pref_e": 0.02,
+            "limit_pref_e": 2,
+            "start_pref_f": 1000,
+            "limit_pref_f": 1,
+            "start_pref_v": 0.0,
+            "limit_pref_v": 0.0
+        },
+        "training": {
+            "numb_steps": 4000,
+            "batch_size": 1,
+            "disp_file": "lcurve.out",
+            "disp_freq": 1000,
+            "save_freq": 1000,
+            "save_ckpt": "model.ckpt",
+            "disp_training": true,
+            "time_training": true,
+            "profiling": false,
+            "profiling_file": "timeline.json",
+            "_comment2": "that's all"
+        }
+    },
+    "model_devi_dt": 0.002,
+    "model_devi_skip": 0,
+    "model_devi_f_trust_lo": 0.08,
+    "model_devi_f_trust_hi": 0.18,
+    "model_devi_clean_traj": true,
+    "model_devi_jobs": [
+        {"sys_idx": [0,1,2,3], "temps": [973,1073,1173], "press": [1.0,100,10000], "trj_freq": 10, "nsteps": 1000, "ensemble": "npt", "_idx": "00"}
+    ],
+    "fp_style": "vasp",
+    "shuffle_poscar": false,
+    "fp_task_max": 300,
+    "fp_task_min": 30,
+    "fp_pp_path": "./input_files",
+    "fp_pp_files": [
+        "POTCAR_F",
+        "POTCAR_Be",
+        "POTCAR_Li",
+        "POTCAR_Th"],
+    "fp_incar": "./INCAR_spe"
+}
