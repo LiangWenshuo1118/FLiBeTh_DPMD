@@ -1,6 +1,6 @@
 {
   "api_version": "1.0",
-  "deepmd_version": "3.x",
+  "deepmd_version": "2.0.3",
   "train": [
     {
       "command": "dp",
